@@ -1,0 +1,18 @@
+version: '3.5'
+
+services:
+  #Python Logs Shipper
+  filebeat:
+    container_name: filebeat
+    hostname: filebeat
+    command: ./init.sh
+    build:
+      context: filebeat/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION : ${ELK_VERSION}
+        # - ELASTICSEARCH_HOST=elasticsearch
+        # - ELASTICSEARCH_PORT=9200
+    restart: always
+    ports:
+      - "5044:5044"
