@@ -1,11 +1,16 @@
 version: '3.5'
 
+# will contain all filebeat data.
+volumes:
+  LOG_DIR:
+
 services:
   #Python Logs Shipper
   filebeat:
     container_name: filebeat
     hostname: filebeat
     command: ./init.sh
+    user: root
     build:
       context: filebeat/
       dockerfile: Dockerfile
@@ -14,5 +19,6 @@ services:
         # - ELASTICSEARCH_HOST=elasticsearch
         # - ELASTICSEARCH_PORT=9200
     restart: always
-    ports:
-      - "5044:5044"
+    volumes:
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ${LOG_DIR}:/home/Logs/:rw

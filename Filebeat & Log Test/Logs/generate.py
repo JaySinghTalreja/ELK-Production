@@ -1,34 +1,18 @@
-#import all packakges generate logs to file.log every 1 sec of type INFO and ERROR with random messages of length 150
-# import random
-# import logging
-# import threading
-# import time
-# import string
-# import os
-# import sys
-# import glob
-# import shutil
-
-# logger = logging.getLogger()
-# logging.basicConfig(filename='file.log', level=logging.INFO)
-# logging.basicConfig(filename='file.log', level=logging.ERROR)
-# logNumber = 0
-# while True:
-#     logging.info(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150)))
-#     logging.error(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150)))
-#     print("Log Number: " + str(logNumber))
-#     logNumber = logNumber + 1
-#     time.sleep(1)
-
-
-
+"""
+Python Script to generate logs for testing purposes
+"""
 import logging
 import time
 import random
 import string
 from logging import StreamHandler
 
+"""
+Custom Designed File Handler to close the file handler after every log entry
+closing the file handler after every log entry will close the log file and let filebeat read the file
+Handler reopens the file and writes the new log entry  and closes it back again to allow filebeat to read the new log line e
 
+"""
 class QuickReleaseFileHandler(StreamHandler):
     def __init__(self, filename_getter):
         super().__init__()

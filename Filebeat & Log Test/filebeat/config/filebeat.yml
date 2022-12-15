@@ -1,0 +1,30 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /home/Logs/*
+    # - /path/two
+    # - /path/three
+
+output:
+  # console:
+  #   enabled: true
+  #   pretty : true
+  logstash:
+    hosts: ["logstash:5044"]
+
+# filebeat.outputs:
+#   # Output plugin that sends logs to the console
+#   console:
+#     # Pretty-print the logs to the console
+#     pretty: true
+
+
+#print filebeat output to
+# output.logstash:
+#   hosts: ["logstash:5044"]
+
+
+# ********************* Location of Filebeat Logs Itself ***********************************
+# {path.home}/logs  Option -> path.logs
+# Config {path.home} -> path.config
