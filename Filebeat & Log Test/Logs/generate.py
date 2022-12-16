@@ -28,9 +28,31 @@ class QuickReleaseFileHandler(StreamHandler):
         self.stream = None
 
 
-fh = QuickReleaseFileHandler(
-    lambda _: 'file.log',
+fhInfo = QuickReleaseFileHandler(
+    lambda _: 'INFO.log',
 )
+# fhInfo.setLevel(logging.INFO)
+
+# fhError = QuickReleaseFileHandler(
+#     lambda _: 'ERROR.log',
+# )
+# fhError.setLevel(logging.ERROR)
+
+# fhCritical = QuickReleaseFileHandler(
+#     lambda _: 'CRITICAL.log',
+# )
+# fhCritical.setLevel(logging.CRITICAL)
+
+# fhDebug = QuickReleaseFileHandler(
+#     lambda _: 'DEBUG.log',
+# )
+# fhDebug.setLevel(logging.DEBUG)
+
+# fhWarning = QuickReleaseFileHandler(
+#     lambda _: 'WARNING.log',
+# )
+# fhWarning.setLevel(logging.WARNING)
+
 
 #Generate JSON Logs with data timestamp, messeage, app and error message using python script
 def generateJSONLogs():
@@ -39,7 +61,20 @@ def generateJSONLogs():
     import random
     import string
     import datetime
-    logging.basicConfig(level=logging.INFO, handlers=[fh]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
+
+    # logging.basicConfig(level=logging.INFO, handlers=[fhInfo]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
+    # logging.basicConfig(level=logging.ERROR, handlers=[fhError])
+    # logging.basicConfig(level=logging.CRITICAL, handlers=[fhCritical]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
+    # logging.basicConfig(level=logging.DEBUG, handlers=[fhDebug])
+    # logging.basicConfig(level=logging.WARNING, handlers=[fhWarning]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+
+    logger.addHandler(fhInfo)
+    # logger.addHandler(fhError)
+    # logger.addHandler(fhCritical)
+    # logger.addHandler(fhDebug)
+    # logger.addHandler(fhWarning)
     logNumber = 1
     while True:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -62,16 +97,30 @@ def generateJSONLogs():
         app = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         error = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150))
         #define the data to be logged
+
+        LOG_LEVELS = [logging.CRITICAL, logging.ERROR, logging.WARNING, logging.INFO, logging.DEBUG]
+        randomLogLevel = random.choice(LOG_LEVELS)
+        switcher = {
+            logging.CRITICAL: logging.critical,
+            logging.ERROR: logging.error,
+            logging.WARNING: logging.warning,
+            logging.INFO: logging.info,
+            logging.DEBUG: logging.debug
+        }
+
+        func = switcher.get(randomLogLevel, lambda: "Invalid log level")
+
         data = {
             "timestamp": timestamp,
             "message": message,
             "requestData": requestData,
             "app": app,
-            "error": error
+            "error": error,
+            "logLevel": logging.getLevelName(randomLogLevel),
         }
-        logging.info(json.dumps(data))                                                                                    ") #add spaces to make the log file size bigger
+        func(json.dumps(data))
+
         print("Log Number: " + str(logNumber))
         logNumber = logNumber + 1
-        time.sleep(5)
-
+        # time.sleep(2)
 generateJSONLogs()
