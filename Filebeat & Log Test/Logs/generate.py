@@ -90,9 +90,13 @@ def generateJSONLogs():
             "zip": ''.join(random.choice(string.digits) for _ in range(10)),
             "country": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
             "ip": ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)),
-            "user_agent": ''.join(random.choice(str ing.ascii_uppercase + string.digits) for _ in range(10)),
+            "user_agent": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
             "created_at": timestamp,
-            "updated_at": timestamp
+            "updated_at": timestamp,
+            "customDataType": {
+                "customDataType1": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+                "customDataType2": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+            }
         }
         app = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         error = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150))
@@ -119,5 +123,6 @@ def generateJSONLogs():
         }
         func(json.dumps(data))
         print("Log Number: " + str(logNumber))
-        logNumber = logNumber + 96
+        logNumber = logNumber + 1
+        time.sleep(1)
 generateJSONLogs()
