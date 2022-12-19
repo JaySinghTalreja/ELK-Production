@@ -92,11 +92,7 @@ def generateJSONLogs():
             "ip": ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)),
             "user_agent": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
             "created_at": timestamp,
-            "updated_at": timestamp,
-            "customDataType": {
-                "customDataType1": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-                "customDataType2": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            }
+            "updated_at": timestamp
         }
         app = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         error = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150))

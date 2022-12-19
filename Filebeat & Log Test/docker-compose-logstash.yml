@@ -10,6 +10,8 @@ services:
       args:
         ELK_VERSION : ${ELK_VERSION}
     restart: always
+    volumes:
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/:ro,Z
     ports:
       - "5044:5044"   # Open port for Filebeat
       - "9600:9600"  # Open port for logstash

@@ -2,16 +2,27 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /home/Logs/*
+    - /home/Logs/*.log
     # - /path/two
     # - /path/three
 
-output:
-  # console:
-  #   enabled: true
-  #   pretty : true
-  logstash:
-    hosts: ["logstash:5044"]
+# processors:
+#   - drop_fields:
+#       fields: ["all"]
+
+# output.multiplexer:
+#   - output.console:
+#       enabled: true
+#   - output.logstash:
+#       hosts: ["localhost:5044"]
+
+# output:
+#   console:
+#     enabled: true
+#     pretty : true
+  # output:
+  #   logstash:
+  #     hosts: ["logstash:5044"]
 
 # filebeat.outputs:
 #   # Output plugin that sends logs to the console
@@ -21,8 +32,8 @@ output:
 
 
 #print filebeat output to
-# output.logstash:
-#   hosts: ["logstash:5044"]
+output.logstash:
+  hosts: ["logstash:5044"]
 
 
 # ********************* Location of Filebeat Logs Itself ***********************************

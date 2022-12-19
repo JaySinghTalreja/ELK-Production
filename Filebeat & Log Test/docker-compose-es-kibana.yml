@@ -1,0 +1,34 @@
+version: '3.5'
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    hostname: elasticsearch
+    build:
+      context: es-kibana/es
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION : ${ELK_VERSION}
+    restart: always
+    ports:
+      - "9200:9200"
+    volumes:
+      - ./es-kibana/es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+  kibana:
+    container_name: kibana
+    hostname: kibana
+    build:
+      context: es-kibana/kibana/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION: ${ELK_VERSION}
+    restart: always
+    volumes:
+      - ./es-kibana/kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    # environment:
+    #   ELASTIC_USERNAME: ${ELASTIC_USERNAME}
+    #   ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+    #   ELASTICSEARCH_HOST_PORT: https://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
+    

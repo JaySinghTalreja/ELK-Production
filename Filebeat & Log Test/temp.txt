@@ -1,0 +1,33 @@
+{
+logstash  |       "@version" => "1",
+logstash  |        "message" => "{\"timestamp\": \"2022-12-19 16:54:09\", \"message\": \"Random Message107\", \"requestData\": {\"id\": \"6170521364\", \"name\": \"E0W0QAIAU8\", \"email\": \"WLVSZ7HXKB@Q45R80FX6N.com\", \"phone\": \"1280055605\", \"address\": \"6JJ91QJE6E\", \"city\": \"L0JDMEHXFX\", \"state\": \"9Z268YR8K1\", \"zip\": \"7498460519\", \"country\": \"460T81UGQA\", \"ip\": \"1316401987.7710807810.5292198077.7549512788\", \"user_agent\": \"KM048LMGRF\", \"created_at\": \"2022-12-19 16:54:09\", \"updated_at\": \"2022-12-19 16:54:09\"}, \"app\": \"9R0QYEVG7W\", \"error\": \"U3FKLCTJW9XOM89M5DPI6LMRQFFN3B3N2P2VF2USRN64Y2SL6O763LUGUID5HBS9VPH03812QX4ATKXC1DQVXXUTPDZ8T8OYLOGZ2MDX8H7L02RK3AYGVRXIJY5NOQBF6SNIQGU6PM7U74GC3UGZGD\", \"logLevel\": \"DEBUG\"}",
+logstash  |            "log" => {
+logstash  |         "offset" => 70472,
+logstash  |           "file" => {
+logstash  |             "path" => "/home/Logs/INFO.log"
+logstash  |         }
+logstash  |     },
+logstash  |          "agent" => {
+logstash  |                 "name" => "filebeat",
+logstash  |              "version" => "8.3.2",
+logstash  |         "ephemeral_id" => "e5e8065f-b685-42b4-a8c1-98d46c618621",
+logstash  |                   "id" => "afe9ada2-00b4-4753-9842-fee155d44b04",
+logstash  |                 "type" => "filebeat"
+logstash  |     },
+logstash  |           "host" => {
+logstash  |         "name" => "filebeat"
+logstash  |     },
+logstash  |           "tags" => [
+logstash  |         [0] "beats_input_codec_plain_applied"
+logstash  |     ],
+logstash  |     "@timestamp" => 2022-12-19T11:24:10.561Z,
+logstash  |          "event" => {
+logstash  |         "original" => "{\"timestamp\": \"2022-12-19 16:54:09\", \"message\": \"Random Message107\", \"requestData\": {\"id\": \"6170521364\", \"name\": \"E0W0QAIAU8\", \"email\": \"WLVSZ7HXKB@Q45R80FX6N.com\", \"phone\": \"1280055605\", \"address\": \"6JJ91QJE6E\", \"city\": \"L0JDMEHXFX\", \"state\": \"9Z268YR8K1\", \"zip\": \"7498460519\", \"country\": \"460T81UGQA\", \"ip\": \"1316401987.7710807810.5292198077.7549512788\", \"user_agent\": \"KM048LMGRF\", \"created_at\": \"2022-12-19 16:54:09\", \"updated_at\": \"2022-12-19 16:54:09\"}, \"app\": \"9R0QYEVG7W\", \"error\": \"U3FKLCTJW9XOM89M5DPI6LMRQFFN3B3N2P2VF2USRN64Y2SL6O763LUGUID5HBS9VPH03812QX4ATKXC1DQVXXUTPDZ8T8OYLOGZ2MDX8H7L02RK3AYGVRXIJY5NOQBF6SNIQGU6PM7U74GC3UGZGD\", \"logLevel\": \"DEBUG\"}"
+logstash  |     },
+logstash  |          "input" => {
+logstash  |         "type" => "log"
+logstash  |     },
+logstash  |            "ecs" => {
+logstash  |         "version" => "8.0.0"
+logstash  |     }
+logstash  | }
