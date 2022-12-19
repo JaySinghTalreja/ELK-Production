@@ -120,5 +120,5 @@ def generateJSONLogs():
         func(json.dumps(data))
         print("Log Number: " + str(logNumber))
         logNumber = logNumber + 1
-        time.sleep(1)
+        # time.sleep(1)
 generateJSONLogs()
