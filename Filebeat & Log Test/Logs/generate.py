@@ -2,6 +2,11 @@ import logging
 import time
 import random
 import string
+import json
+import time
+import random
+import string
+import datetime
 from logging import StreamHandler
 
 """
@@ -55,45 +60,63 @@ fhInfo = QuickReleaseFileHandler(
 
 
 #Generate JSON Logs with data timestamp, messeage, app and error message using python script
-def generateJSONLogs():
-    import json
-    import time
-    import random
-    import string
-    import datetime
 
-    # logging.basicConfig(level=logging.INFO, handlers=[fhInfo]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
-    # logging.basicConfig(level=logging.ERROR, handlers=[fhError])
-    # logging.basicConfig(level=logging.CRITICAL, handlers=[fhCritical]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
-    # logging.basicConfig(level=logging.DEBUG, handlers=[fhDebug])
-    # logging.basicConfig(level=logging.WARNING, handlers=[fhWarning]) #set this handle for every log level, ex CRITICAL, ERROR, WARNING, INFO, DEBUG
+#Get random Multiple nested JSON data
+
+def getJsonDataTypeOne():
+    return {
+        "id": ''.join(random.choice(string.digits) for _ in range(10)),
+        "name": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "email": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '@' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '.com',
+        "phone": ''.join(random.choice(string.digits) for _ in range(10)),
+        "address": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "company": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "country": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "customType": {
+            "city": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+            "state": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+            "zip": ''.join(random.choice(string.digits) for _ in range(10)),
+            "customTypeTwo": {
+                "city": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+                "state": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+                "zip": ''.join(random.choice(string.digits) for _ in range(10)),
+                "country": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+            }
+        }
+    }
+
+def getJsonDataTypeTwo():
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return {
+        "id": ''.join(random.choice(string.digits) for _ in range(10)),
+        "name": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "email": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '@' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '.com',
+        "phone": ''.join(random.choice(string.digits) for _ in range(10)),
+        "address": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "city": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "state": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "zip": ''.join(random.choice(string.digits) for _ in range(10)),
+        "country": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "ip": ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)),
+        "user_agent": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
+        "created_at": timestamp,
+        "updated_at": timestamp
+    }
+
+
+def generateJSONLogs():
+    
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
     logger.addHandler(fhInfo)
-    # logger.addHandler(fhError)
-    # logger.addHandler(fhCritical)
-    # logger.addHandler(fhDebug)
-    # logger.addHandler(fhWarning)
     logNumber = 1
     while True:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         message = ''.join("Random Message" + str(logNumber))
-        requestData = {
-            "id": ''.join(random.choice(string.digits) for _ in range(10)),
-            "name": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "email": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '@' + ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)) + '.com',
-            "phone": ''.join(random.choice(string.digits) for _ in range(10)),
-            "address": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "city": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "state": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "zip": ''.join(random.choice(string.digits) for _ in range(10)),
-            "country": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "ip": ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)) + '.' + ''.join(random.choice(string.digits) for _ in range(10)),
-            "user_agent": ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10)),
-            "created_at": timestamp,
-            "updated_at": timestamp
-        }
+        randomFuncs = [getJsonDataTypeOne, getJsonDataTypeTwo]
+        callingFunc = random.choice(randomFuncs)
+        requestData = callingFunc()
         app = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))
         error = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(150))
         #define the data to be logged
@@ -117,8 +140,9 @@ def generateJSONLogs():
             "error": error,
             "logLevel": logging.getLevelName(randomLogLevel),
         }
-        func(json.dumps(data))
-        print("Log Number: " + str(logNumber))
-        logNumber = logNumber + 1
+        for i in range(1, 100):
+            func(json.dumps(data))
+            print("Log Number: " + str(logNumber))
+            logNumber = logNumber + 1
         # time.sleep(1)
 generateJSONLogs()
