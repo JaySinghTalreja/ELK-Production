@@ -140,9 +140,8 @@ def generateJSONLogs():
             "error": error,
             "logLevel": logging.getLevelName(randomLogLevel),
         }
-        for i in range(1, 100):
-            func(json.dumps(data))
-            print("Log Number: " + str(logNumber))
-            logNumber = logNumber + 1
-        # time.sleep(1)
+        func(json.dumps(data))
+        print("Log Number: " + str(logNumber))
+        logNumber = logNumber + 1
+        time.sleep(0.3)
 generateJSONLogs()

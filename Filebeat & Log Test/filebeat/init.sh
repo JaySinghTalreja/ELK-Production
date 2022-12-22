@@ -17,6 +17,6 @@ nohup tail -F * &
 
 #cd back to the filebeat directory
 cd $current_dir
-echo "Back to Dir:" + $current_dir
+echo "Back to Dir Parent Filebeat Dir:" + $current_dir
 #wait before all the background process are working, if the shell closes the container will close as it is the entrypoint for the container
 wait

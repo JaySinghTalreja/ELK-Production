@@ -18,6 +18,10 @@ services:
         ELK_VERSION : ${ELK_VERSION}
         # - ELASTICSEARCH_HOST=elasticsearch
         # - ELASTICSEARCH_PORT=9200
+    environment:
+      - LOGSTASH_HOST_PORT=${LOGSTASH_HOST_PORT}
+    ports:
+      - "5066:5066"
     restart: always
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro

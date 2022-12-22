@@ -6,6 +6,31 @@ filebeat.inputs:
     # - /path/two
     # - /path/three
 
+#print filebeat output to
+output.logstash:
+  hosts: ["${LOGSTASH_HOST_PORT}"]
+
+logging.level: error
+logging.to_files: true
+logging.files:
+  path: /home/FilebeatLogs
+  name: filebeat.log
+  rotateeverybytes: 10485760 #10MB
+  keepfiles: 7
+  permissions: 0644
+
+#================================ HTTP Endpoint ======================================
+# Enabled so we can monitor filebeat using filebeat exporter if needed.
+# Each beat can expose internal metrics through a HTTP endpoint. For security
+# reasons the endpoint is disabled by default. This feature is currently experimental.
+# Stats can be access through http://localhost:5066/stats . For pretty JSON output
+# append ?pretty to the URL.
+
+# Defines if the HTTP endpoint is enabled.
+http.enabled: true
+http.host: 0.0.0.0
+http.port: 5066
+
 # processors:
 #   - drop_fields:
 #       fields: ["all"]
@@ -29,11 +54,6 @@ filebeat.inputs:
 #   console:
 #     # Pretty-print the logs to the console
 #     pretty: true
-
-
-#print filebeat output to
-output.logstash:
-  hosts: ["logstash:5044"]
 
 
 # ********************* Location of Filebeat Logs Itself ***********************************
