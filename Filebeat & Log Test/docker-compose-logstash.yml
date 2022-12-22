@@ -12,6 +12,10 @@ services:
     restart: always
     environment:
       - ELASTICSEARCH_HOST_PORT=${ELASTICSEARCH_HOST_PORT}
+      # - LS_JAVA_OPTS="-Xms1024m -Xmx1024m"
+      - LS_OPTS="--config.reload.automatic"
+      # - LS_OPTS="--config.reload.automatic --config.reload.interval 20"
+
     volumes:
       - ./logstash/pipeline/:/usr/share/logstash/pipeline/:ro,Z
     ports:
