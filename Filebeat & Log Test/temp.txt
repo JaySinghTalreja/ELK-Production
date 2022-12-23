@@ -58,3 +58,11 @@ logstash  |         },
 logstash  |           "timestamp" => "2022-12-22 12:49:38"
 logstash  |     }
 logstash  | }
+
+
+
+commands
+docker rmi -f $(docker images -aq)
+docker rm $(docker ps -a -q)
+docker network rm $(docker network ls -q)
+http://localhost:9200/_cat/indices?h=index,creation.date.string
